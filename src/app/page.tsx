@@ -1,101 +1,190 @@
+import React from 'react'
+import { IoCheckmarkCircle } from "react-icons/io5";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
+import Link from "next/link";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <>
+      <Navbar />
+      {/* hero section */}
+      <div>
+        <div className='hidden lg:block lg:bg-heroImage bg-cover bg-center lg:h-[704px] lg:w-full lg:py-[130px] lg:pl-[730px] lg:pr-[80px]'>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          <div className=' bg-white pl-[53px] py-[47px]'>
+            <div className='mb-[157px]'>
+              <h2 className='font-normal text-[32px] leading-[44.8px] text-[#22202E] mb-5'>Luxury homeware for people who love timeless design quality</h2>
+              <p className='font-normal text-[18px] leading-[27px] text-[#5B5676]'>Shop the new Spring 2022 collection today</p>
+            </div>
+            <button className='py-4 px-8 flex gap-5 bg-[#F9F9F9] text-[#2A254B] '>
+              View collection
+            </button>
+          </div>
+
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        <div className='lg:hidden w-[390px] '>
+          <div className='w-[341px] mx-[23px] mt-[47px] mb-8 flex flex-col gap-8'>
+            <h2 className='font-normal text-[24px] leading-[29.52px] text-[#22202E] '>Luxury homeware for people who love timeless design quality</h2>
+            <p className='font-normal text-[16px] leading-[21.6px] text-[#5B5676]'>With our new collection, view over 400 bespoke pieces from homeware through to furniture today</p>
+            <Link href="/products"> <button className='w-full h-[56px] flex items-center justify-center gap-5  bg-[#F9F9F9] text-[#2A254B] '>
+              View collection
+            </button></Link>
+          </div>
+          <Image src="/bg-hero.png" alt="Hero Image" width={390} height={304}></Image>
+        </div>
+
+      </div>
+
+      {/* our services */}
+
+
+
+      <div className='px-[24px] py-[49px] lg:py-[80px] lg:px-[82px]'>
+        <h4 className='lg:text-center font-normal lg:text-[24px] tex-[20px]  lg:leading-[33.6px] leading-7 text-[#2A254B]'>What makes our brand different</h4>
+
+        <div className='mt-[36px] lg:mt-[57px] flex flex-col lg:flex-row lg:gap-[22px] gap-[26px]'>
+
+          <div className='lg:p-[48px] py-[28px] px-6 bg-[#F9F9F9] '>
+            <div className='flex flex-col gap-3'>
+              <Image src="/different-1.svg" alt='Delivery' width={24} height={24}></Image>
+              <h4 className='text-[20px] text-[#2A254B] leading-7 font-normal '>Next day as standard</h4>
+              <p className='text-[16px] text-[#2A254B] leading-6 font-normal'>Order before 3pm and get your order the next day as standard</p>
+            </div>
+          </div>
+
+          <div className=' lg:p-[48px] py-[28px] px-6 bg-[#F9F9F9] '>
+            <div className='flex flex-col gap-3'>
+              <Image src="/different-2.svg" alt='Checkmark--outline' width={24} height={24}></Image>
+              <h4 className='text-[20px] text-[#2A254B] leading-7 font-normal '>Made by true artisans</h4>
+              <p className='text-[16px] text-[#2A254B] leading-6 font-normal'>Handmade crafted goods made with real passion and craftmanship</p>
+            </div>
+          </div>
+
+
+          <div className='lg:p-[48px] py-[28px] px-6 bg-[#F9F9F9] '>
+            <div className='flex flex-col gap-3'>
+              <Image src="/different-3.svg" alt='Purchase' width={24} height={24}></Image>
+              <h4 className='text-[20px] text-[#2A254B] leading-7 font-normal '>Unbeatable prices</h4>
+              <p className='text-[16px] text-[#2A254B] leading-6 font-normal'>For our materials and quality you won&apos;t find better prices anywhere</p>
+            </div>
+          </div>
+
+          <div className='lg:p-[48px] py-[28px] px-6 bg-[#F9F9F9] '>
+            <div className='flex flex-col gap-3'>
+              <Image src="/different-4.svg" alt='Sprout' width={24} height={24}></Image>
+              <h4 className='text-[20px] text-[#2A254B] leading-7 font-normal '>Next day as standard</h4>
+              <p className='text-[16px] text-[#2A254B] leading-6 font-normal'>We use 100% recycled to ensure our footprint is more manageable</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      {/* third section */}
+      <div className='w-390 lg:w-full pt-6 pb-7 px-6 lg:px-[80px]'>
+        <div className=' grid grid-cols-2 grid-rows-2 gap-[15px] lg:flex lg:gap-5 '>
+       
+
+          <div className=' flex flex-col gap-2 lg:gap-6 text-[#2A254B]'>
+            <Image src="home-product-1.svg" alt='List Card1' width={100} height={100} className='w-[163px] h-[201px] lg:w-[305px] lg:h-[375px]'></Image>
+            <h4 className='text-[20px] leading-7 font-normal'>Rustic Vase Set</h4>
+            <p className='text-[18px] leading-7 font-normal'>£399</p>
+          </div>
+       
+
+          <div className=' flex flex-col gap-2 lg:gap-6 text-[#2A254B]'>
+            <Image src="home-product-2.svg" alt='List Card2' width={163} height={201} className='w-[163px] h-[201px] lg:w-[305px] lg:h-[375px]'></Image>
+            <h4 className='text-[20px] leading-7 font-normal'>Rustic Vase Set</h4>
+            <p className='text-[18px] leading-7 font-normal'>£399</p>
+          </div>
+
+          <div className=' flex flex-col gap-2 lg:gap-6 text-[#2A254B]'>
+            <Image src="home-product-3.svg" alt='List Card3' width={163} height={201} className='w-[163px] h-[201px] lg:w-[305px] lg:h-[375px]'></Image>
+            <h4 className='text-[20px] leading-7 font-normal'>Rustic Vase Set</h4>
+            <p className='text-[18px] leading-7 font-normal'>£399</p>
+          </div>  
+
+          <div className=' flex flex-col gap-2 lg:gap-6 text-[#2A254B]'>
+            <Image src="home-product-4.svg" alt='List Card4' width={163} height={201} className='w-[163px] h-[201px] lg:w-[305px] lg:h-[375px]'></Image>
+            <h4 className='text-[20px] leading-7 font-normal'>Rustic Vase Set</h4>
+            <p className='text-[18px] leading-7 font-normal'>£399</p>
+          </div>
+        </div>
+        <Link href="/products"> <button className='py-4 px-[100px] mt-10 lg:px-8  mx-auto lg:mt-[48px] lg:mb-3 flex lg:gap-5 gap-[10px] items-center text-[16px] leading-6 font-normal  bg-[#F9F9F9] text-[#2A254B] '>
+          View collection
+        </button></Link>
+      </div>
+
+      {/* fourth section */}
+      <div className='px-8 py-6 lg:px-[80px] lg:py-[60px] flex flex-col lg:flex-row lg:gap-4 gap-6'>
+        <div className='lg:w-[643px] lg:h-[478px]  bg-[#2A254B] lg:pl-[64px] px-[32px] pt-[36px] lg:py-[64px] '>
+          <div className='mb-[56px] lg:mb-[205px]'>
+            <h4 className='font-normal lg:text-[32px] text-[20px] leading-7 lg:leading-[39.63px] text-white mb-5'>It started with a small idea</h4>
+            <p className='font-normal lg:text-[18px] tex-[14px] leading-[21px] lg:leading-[24.3px] text-[white]'>A global brand with local beginnings, our story begain in a small studio in South London in early 2014</p>
+          </div>
+          <Link href="/products"> <button className='py-4 px-[66px] mb-[30px]  lg:px-8 lg:mt-[48px] lg:mb-3 flex lg:gap-5 gap-[10px]  text-[16px] leading-6 font-normal  bg-[#F9F9F926] text-white'>
+            View collection
+          </button></Link>
+        </div>
+        <Image src="/about.png" alt='Listing2' width={643} height={478} className='hidden lg:block'></Image>
+        <Image src="/about.png" alt='Listing2' width={342} height={259} className='lg:hidden block w-[342px]'></Image>
+
+
+      </div>
+
+
+
+
+      {/* fifth section  */}
+
+      <div className='bg-benefitHome bg-cover bg-center h-[373px] w-[390px] lg:h-[444px] lg:w-full lg:pt-[97px] pt-[24px]'>
+        <div className='w-[329px]  lg:w-[494px]  lg:ml-[473px] ml-[24px] flex flex-col gap-5  lg:gap-[30px] '>
+          <h2 className='w-full lg:text-[32px] text-[24px] leading-[33.6px] lg:leading-[44.8px] lg:text-center font-normal text-white'>
+            Join the club and get the benefits</h2>
+          <p className='lg:text-[18px] text-[14px] leading-[21px] lg:leading-[27px] lg:text-center font-normal text-white'>Sign up for our newsletter and receive exclusive offers on new ranges, sales, pop up stores and more</p>
+          <div className='flex flex-col lg:flex-row lg:gap-[36px] '>
+            <div className='flex lg:gap-1 gap-2'>
+              <IoCheckmarkCircle className='text-white flex  items-center mt-1' size={16} />
+              <p className='text-[16px] leading-6 text-center'>Exclusive offers</p>
+            </div>
+            <div className='flex lg:gap-1 gap-2'>
+              <IoCheckmarkCircle className='text-white flex  items-center mt-1' size={16} />
+              <p className='text-[16px] leading-6 text-center'>Free events</p>
+            </div>
+            <div className='flex lg:gap-1 gap-2'>
+              <IoCheckmarkCircle className='text-white flex  items-center mt-1' size={16} />
+              <p className='text-[16px] leading-6 text-center'>Large discounts</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div className='flex lg:ml-[473px] mx-[24px] mt-[28px] lg:mt-10'>
+          <div className='lg:w-[354px] h-[56px] w-[224px] bg-[#F9F9F9] '>
+            <input type="text" placeholder='your@email.com' className='bg-transparent h-full w-full pl-[32px] text-[#00000066] border-none' />
+          </div>
+          <button type='submit' className='font-normal h-[56px] text-[16px] leading-6 py-4 lg:px-8 px-5 flex gap-[10px] bg-[#2A254B] text-white'>Sign up</button>
+
+        </div>
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <Footer />
+    </>
   );
 }
