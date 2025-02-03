@@ -29,7 +29,7 @@ export default function Home() {
             <h2 className='font-normal text-[24px] leading-[29.52px] text-[#22202E] '>Luxury homeware for people who love timeless design quality</h2>
             <p className='font-normal text-[16px] leading-[21.6px] text-[#5B5676]'>With our new collection, view over 400 bespoke pieces from homeware through to furniture today</p>
             <Link href="/products"> <button className='w-full h-[56px] flex items-center justify-center gap-5  bg-[#F9F9F9] text-[#2A254B] '>
-              View collection
+              View Products
             </button></Link>
           </div>
           <Image src="/bg-hero.png" alt="Hero Image" width={390} height={304}></Image>

@@ -118,7 +118,7 @@ export default function Home() {
                   <h4 className="mt-6 font-semibold text-xl">{product.name}</h4>
                   <p className="body-lg mt-2">£{product.price}</p>
                   <button className="bg-[#2A254B] text-white mt-4 px-6 py-2 rounded-full transform transition-all duration-300 hover:bg-[#3d2a6e]">
-                    <a href={`/product/${product.slug}`}>View Description</a> {/* Link to product page */}
+                  <a href={`/productdesc/${product.slug}`}>View Description</a> {/* Link to product page */}
                   </button>
                 </div>
               ))}
