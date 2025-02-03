@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
 import { useState } from "react";
 import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Cart() {
-  // Define the initial cart state
   const [cartItems, setCartItems] = useState([
     {
       id: 1,
-      name: "Graystone vase",
+      name: "Graystone Vase",
       description: "A timeless ceramic vase with a tri-color grey glaze.",
       price: 85,
       quantity: 1,
@@ -18,7 +18,7 @@ export default function Cart() {
     },
     {
       id: 2,
-      name: "Basic white vase",
+      name: "Basic White Vase",
       description: "Beautiful and simple, this is one for the classics.",
       price: 85,
       quantity: 1,
@@ -26,119 +26,88 @@ export default function Cart() {
     },
   ]);
 
-  // Update quantity
+  // Update Quantity
   const updateQuantity = (id: number, action: "increment" | "decrement") => {
     setCartItems((prevItems) =>
       prevItems.map((item) =>
         item.id === id
-          ? {
-              ...item,
-              quantity:
-                action === "increment"
-                  ? item.quantity + 1
-                  : item.quantity > 1
-                  ? item.quantity - 1
-                  : 1,
-            }
+          ? { ...item, quantity: action === "increment" ? item.quantity + 1 : Math.max(1, item.quantity - 1) }
           : item
       )
     );
   };
 
-  // Calculate total price
-  const totalPrice = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
+  // Calculate Total Price
+  const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
   return (
     <>
       <Navbar />
 
-      <main>
-        <section className="pt-9 sm:pt-16 pl-6 sm:pl-[188px] pr-6 sm:pr-[193px] bg-[--light-gray]">
-          <h1 className="max-sm:text-[24px]">Your shopping cart</h1>
+      <main className="bg-gray-50 min-h-screen py-10 px-4 sm:px-12">
+        <h1 className="text-3xl font-semibold text-[#2A254B] text-center">Your Shopping Cart</h1>
 
-          <table className="mt-12 w-full">
-            <thead className="max-sm:hidden">
-              <tr className="border-b border-[--border-gray] pb-4 body-sm">
-                <td>Product</td>
-                <td>Quantity</td>
-                <td>Total</td>
-              </tr>
-            </thead>
-            <tbody>
-              {cartItems.map((item) => (
-                <tr key={item.id} className="sm:pt-5 border-b border-[--border-gray] pb-4">
-                  <td>
-                    <div className="flex gap-x-[21px] sm:items-center">
-                      <img src={item.image} alt={item.name} />
-                      <div className="space-y-2 max-sm:mt-[19px]">
-                        <h4 className="text-[16px] leading-[20px]">{item.name}</h4>
-                        <p className="text-sm w-[179px]">{item.description}</p>
-                        <p>£{item.price}</p>
-                        <div className="py-3 px-4 max-sm:visible flex items-center gap-x-8">
-                          <span
-                            className="text-[#2A254B] text-5xl cursor-pointer"
-                            onClick={() => updateQuantity(item.id, "decrement")}
-                          > 
-                            -
-                          </span>
-                          <span>{item.quantity}</span>
-                          <span
-                            className="text-[#2A254B] text-3xl cursor-pointer"
-                            onClick={() => updateQuantity(item.id, "increment")}
-                          >
-                            +
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="py-3 px-4 max-sm:hidden flex items-center gap-x-8">
-                      <span
-                        className="text-[--border-gray] cursor-pointer"
-                        onClick={() => updateQuantity(item.id, "increment")}
-                      >
-                        +
-                      </span>
-                      <span>{item.quantity}</span>
-                      <span
-                        className="text-[--border-gray] cursor-pointer"
-                        onClick={() => updateQuantity(item.id, "decrement")}
-                      >
-                        -
-                      </span>
-                    </div>
-                  </td>
-
-                  <td className="max-sm:hidden">£{item.price * item.quantity}</td>
+        {/* Cart Items */}
+        <div className="max-w-4xl mx-auto mt-8 bg-white p-6 rounded-lg shadow-md">
+          {cartItems.length > 0 ? (
+            <table className="w-full">
+              <thead>
+                <tr className="text-left text-gray-700 border-b pb-2">
+                  <th className="py-2">Product</th>
+                  <th className="py-2 text-center">Quantity</th>
+                  <th className="py-2 text-right">Total</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {cartItems.map((item) => (
+                  <tr key={item.id} className="border-b py-4">
+                    <td className="py-4 flex items-center gap-4">
+                      <Image src={item.image} alt={item.name} width={80} height={80} className="rounded-lg" />
+                      <div>
+                        <h4 className="font-medium text-lg text-[#2A254B]">{item.name}</h4>
+                        <p className="text-gray-500 text-sm">{item.description}</p>
+                        <p className="font-semibold text-[#2A254B] mt-1">£{item.price}</p>
+                      </div>
+                    </td>
+                    <td className="py-4 text-center">
+                      <div className="flex items-center justify-center space-x-4">
+                        <button
+                          onClick={() => updateQuantity(item.id, "decrement")}
+                          className="w-8 h-8 flex items-center justify-center border rounded-full text-[#2A254B] hover:bg-gray-200"
+                        >
+                          -
+                        </button>
+                        <span className="text-lg">{item.quantity}</span>
+                        <button
+                          onClick={() => updateQuantity(item.id, "increment")}
+                          className="w-8 h-8 flex items-center justify-center border rounded-full text-[#2A254B] hover:bg-gray-200"
+                        >
+                          +
+                        </button>
+                      </div>
+                    </td>
+                    <td className="py-4 text-right font-medium text-[#2A254B]">£{item.price * item.quantity}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <p className="text-gray-600 text-center py-10">Your cart is empty.</p>
+          )}
 
-          <div className="pt-7 pb-[55px] sm:pb-[48px] w-fit ml-auto">
-            <div className="space-y-3">
-              <div className="flex gap-x-4 items-center w-fit ml-auto">
-                <h4 className="text-[--primary]">Subtotal</h4>
-                <h3 className="text-[--dark-primary]">£{totalPrice}</h3>
-              </div>
-              <p className="max-sm:whitespace-nowrap max-sm:w-fit ml-auto text-sm text-[--primary]">
-                Taxes and shipping are calculated at checkout
-              </p>
+          {/* Subtotal & Checkout */}
+          {cartItems.length > 0 && (
+            <div className="mt-6 text-right">
+              <div className="text-lg font-semibold text-[#2A254B]">Subtotal: £{totalPrice}</div>
+              <p className="text-gray-500 text-sm mt-1">Taxes and shipping calculated at checkout.</p>
+              <Link href="/checkout">
+                <button className="mt-4 w-full sm:w-auto bg-[#2A254B] text-white py-3 px-8 rounded-lg shadow-md hover:bg-opacity-90">
+                  Go to Checkout
+                </button>
+              </Link>
             </div>
-            <Link href="/checkout">
-              <button
-                type="submit"
-                className="bg-[--dark-primary] max-sm:w-full block w-fit ml-auto text-white py-4 mt-8 sm:mt-4 px-[117px] sm:px-[48px]"
-              >
-                Go to checkout
-              </button>
-            </Link>
-          </div>
-        </section>
+          )}
+        </div>
       </main>
 
       <Footer />
