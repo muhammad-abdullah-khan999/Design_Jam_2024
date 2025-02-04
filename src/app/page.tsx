@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react'
 import { IoCheckmarkCircle } from "react-icons/io5";
 import Navbar from "../../components/Navbar";
@@ -11,15 +13,15 @@ export default function Home() {
       <Navbar />
       {/* hero section */}
       <div>
-        <div className='hidden lg:block lg:bg-heroImage bg-cover bg-center lg:h-[704px] lg:w-full lg:py-[130px] lg:pl-[730px] lg:pr-[80px]'>
+        <div className='hidden lg:block lg:bg-[url(/heroImage.png)] bg-cover bg-center lg:h-[704px] lg:w-full lg:py-[130px] lg:pl-[730px] lg:pr-[80px] '>
 
-          <div className=' bg-white pl-[53px] py-[47px]'>
-            <div className='mb-[157px]'>
-              <h2 className='font-normal text-[32px] leading-[44.8px] text-[#22202E] mb-5'>Luxury homeware for people who love timeless design quality</h2>
+          <div className=' bg-white pl-[53px] py-[47px] ml-40 w-[830px] rounded-lg'>
+            <div className='mb-[157px] w-[513px]'>
+              <h2 className='font-normal text-[32px] leading-[44.8px] text-[#22202E] mb-5 '>Luxury homeware for people who love timeless design quality</h2>
               <p className='font-normal text-[18px] leading-[27px] text-[#5B5676]'>Shop the new Spring 2022 collection today</p>
             </div>
-            <button className='py-4 px-8 flex gap-5 bg-[#F9F9F9] text-[#2A254B] '>
-              View collection
+            <button className='py-4 px-8 flex gap-5 bg-[#2A254B] text-white hover:bg-white hover:text-[#2A254B] rounded-xl border border-[#2A254B]'>
+              Click to see Products
             </button>
           </div>
 
@@ -28,8 +30,8 @@ export default function Home() {
           <div className='w-[341px] mx-[23px] mt-[47px] mb-8 flex flex-col gap-8'>
             <h2 className='font-normal text-[24px] leading-[29.52px] text-[#22202E] '>Luxury homeware for people who love timeless design quality</h2>
             <p className='font-normal text-[16px] leading-[21.6px] text-[#5B5676]'>With our new collection, view over 400 bespoke pieces from homeware through to furniture today</p>
-            <Link href="/products"> <button className='w-full h-[56px] flex items-center justify-center gap-5  bg-[#F9F9F9] text-[#2A254B] '>
-              View Products
+            <Link href="/products"> <button className='w-full h-[56px] flex items-center justify-center gap-5  bg-[#2A254B] text-white hover:bg-white hover:text-[#2A254B] rounded-xl border border-[#2A254B]'>
+              Click to see Products
             </button></Link>
           </div>
           <Image src="/bg-hero.png" alt="Hero Image" width={390} height={304}></Image>
@@ -113,7 +115,7 @@ export default function Home() {
             <p className='text-[18px] leading-7 font-normal'>£399</p>
           </div>
         </div>
-        <Link href="/products"> <button className='py-4 px-[100px] mt-10 lg:px-8  mx-auto lg:mt-[48px] lg:mb-3 flex lg:gap-5 gap-[10px] items-center text-[16px] leading-6 font-normal  bg-[#F9F9F9] text-[#2A254B] '>
+        <Link href="/products"> <button className='py-4 px-[100px] mt-10 lg:px-8  mx-auto lg:mt-[48px] lg:mb-3 flex lg:gap-5 gap-[10px] items-center text-[16px] leading-6 font-normal  bg-[#2A254B] text-white hover:bg-white hover:text-[#2A254B] rounded-full border border-[#2A254B] '>
           View collection
         </button></Link>
       </div>

@@ -148,3 +148,46 @@ h6 {
     @apply bg-background text-foreground;
   }
 }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Force Toast to stay at the top of the screen */
+.Toastify__toast-container {
+  position: fixed !important;
+  top: 0 !important;
+  left: 50% !important;
+  transform: translateX(0%) !important;
+  width: auto !important;
+  z-index: 9999 !important;
+  pointer-events: auto !important;
+}
+
+.Toastify__toast {
+  position: relative !important;
+  margin-top: 10px !important; /* Small gap from the very top */
+}
+
+/* Toast background color */
+.Toastify__toast {
+  background-color: #483e88 !important;
+  color: white !important;
+}
+
+/* Change the check icon color */
+.Toastify__toast-icon > svg {
+  fill: white !important;
+}
+
+/* Change bottom progress bar color */
+.Toastify__progress-bar {
+  background: white !important;
+}
+
+/* Optional: Change close button color */
+.Toastify__close-button {
+  color: white !important;
+}

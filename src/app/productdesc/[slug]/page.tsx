@@ -1,7 +1,17 @@
+"use client";
+
 import { client } from "@/sanity/lib/client";
 import Image from "next/image";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../../redux/cartSlice"; // Import the action
+import { useRouter } from "next/navigation"; // Change import to next/navigation
+import React, { useEffect, useState } from "react";
+import Footer from "../../../../components/Footer";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+// Fetch data function
 async function getData(slug: string) {
   const query = `*[_type == "product" && slug.current == $slug][0] {
     _id,
@@ -19,6 +29,7 @@ async function getData(slug: string) {
   return await client.fetch(query, { slug });
 }
 
+// Fetch recommended products function
 async function getRecommendedProducts(currentSlug: string) {
   const query = `*[_type == "product" && slug.current != $currentSlug] | order(_createdAt desc) [0...4] {
     _id,
@@ -31,17 +42,63 @@ async function getRecommendedProducts(currentSlug: string) {
   return await client.fetch(query, { currentSlug });
 }
 
-export default async function ProductPage({ params }: { params: { slug: string } }) {
-  const data = await getData(params.slug);
+export default function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
+  const dispatch = useDispatch();
+  const router = useRouter();
 
-  if (!data) {
+  const [productData, setProductData] = useState<any>(null);
+  const [recommendedProducts, setRecommendedProducts] = useState<any[]>([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const resolvedParams = await params; // Unwrap the promise
+
+      if (!resolvedParams?.slug) return;
+
+      const data = await getData(resolvedParams.slug);
+      setProductData(data);
+
+      const recommended = await getRecommendedProducts(resolvedParams.slug);
+      setRecommendedProducts(recommended);
+    }
+
+    fetchData();
+  }, [params]); // Dependency array includes params (which is a promise)
+
+  if (!productData) {
     return <div className="text-center py-10">Product not found</div>;
   }
 
-  const recommendedProducts = await getRecommendedProducts(params.slug);
+  const handleAddToCart = () => {
+    const cartItem = {
+      id: productData.currentSlug,
+      name: productData.name,
+      price: productData.price,
+      image: productData.image,
+      quantity: 1,
+    };
+
+    dispatch(addToCart(cartItem)); // Add to Redux store
+
+    // Show toast notification
+    toast.success(`${productData.name} added to cart!`, {
+      position: "top-right",
+      autoClose: 3000, // Closes in 3 seconds
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      theme: "dark",
+      style: { backgroundColor: "#2A254B", color: "white"}, // Custom styling
+    });
+  };
 
   return (
     <div className="min-h-screen bg-white">
+        {/* Toast Notification Container */}
+        <ToastContainer />
+
+
       {/* Announcement Bar */}
       <div className="bg-[#2A254B] text-white text-center py-3 px-4 text-sm relative">
         <p>Free delivery on all orders over £50 with code easter checkout</p>
@@ -74,7 +131,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
                 />
               </svg>
             </button>
-            <button className="text-gray-600">
+           <Link href={"../../cart"}> <button className="text-gray-600">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
@@ -83,7 +140,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
                   d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
                 />
               </svg>
-            </button>
+            </button></Link>
           </div>
         </div>
       </nav>
@@ -92,7 +149,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 py-12 px-6">
         <div className="flex justify-center">
           <Image
-            src={data.image}
+            src={productData.image}
             alt="Product Image"
             width={600}
             height={600}
@@ -100,16 +157,16 @@ export default async function ProductPage({ params }: { params: { slug: string }
           />
         </div>
         <div className="space-y-6">
-          <h1 className="text-3xl font-light">{data.name}</h1>
-          <p className="text-2xl text-[#2A254B]">£{data.price}</p>
+          <h1 className="text-3xl font-light">{productData.name}</h1>
+          <p className="text-2xl text-[#2A254B]">£{productData.price}</p>
 
           <div className="space-y-4">
             <h2 className="font-medium">Description</h2>
-            <p className="text-gray-600">{data.description}</p>
+            <p className="text-gray-600">{productData.description}</p>
             <ul className="list-disc list-inside text-gray-600 space-y-1">
-              <li>{data.features[0]}</li>
-              <li>{data.features[1]}</li>
-              <li>{data.features[2]}</li>
+              <li>{productData.features[0]}</li>
+              <li>{productData.features[1]}</li>
+              <li>{productData.features[2]}</li>
             </ul>
           </div>
 
@@ -118,21 +175,27 @@ export default async function ProductPage({ params }: { params: { slug: string }
             <div className="grid grid-cols-3 gap-4">
               <div>
                 <p className="text-gray-600">Height</p>
-                <p>{data.height}</p>
+                <p>{productData.height}</p>
               </div>
               <div>
                 <p className="text-gray-600">Width</p>
-                <p>{data.width}</p>
+                <p>{productData.width}</p>
               </div>
               <div>
                 <p className="text-gray-600">Depth</p>
-                <p>{data.depth}</p>
+                <p>{productData.depth}</p>
               </div>
             </div>
           </div>
 
           <div className="flex items-center space-x-4">
-            <button className="bg-[#2A254B] text-white px-6 py-2 rounded-full">Add to cart</button>
+            <button onClick={handleAddToCart} className="bg-[#2A254B] hover:bg-[#544997] text-white px-6 py-2 rounded-full">
+              Add to Cart
+            </button>
+           <Link href={"../../cart"}><button className="bg-white hover:bg-gray-100 text-[#2A254B] border border-[#2A254B] px-6 py-2 rounded-full">
+              Go to Cart
+            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -140,15 +203,15 @@ export default async function ProductPage({ params }: { params: { slug: string }
       {/* You might also like */}
       <div className="max-w-7xl mx-auto py-12 px-6">
         <h2 className="text-2xl mb-8">You might also like</h2>
-        <div className="grid md:grid-cols-4 sm:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-4 sm:grid-cols-2 gap-6 ">
           {recommendedProducts.map((product: any) => (
-            <Link key={product._id} href={`/productdesc/${product.slug}`} className="space-y-2">
+            <Link key={product._id} href={`/productdesc/${product.slug}`} className="space-y-2 ">
               <Image
                 src={product.image || "/placeholder.svg"}
                 alt={product.name}
                 width={305}
                 height={375}
-                className="w-full h-[250px] object-cover"
+                className="w-full h-[250px] object-cover "
               />
               <h3 className="font-medium">{product.name}</h3>
               <p>£{product.price}</p>
@@ -157,23 +220,22 @@ export default async function ProductPage({ params }: { params: { slug: string }
         </div>
         <div className="text-center mt-8">
           <Link href="/products">
-            <button className="border border-[#2A254B] text-[#2A254B] px-6 py-2 rounded-full">
-              View collection
+            <button className="border border-[#2A254B] text-[#2A254B] px-6 py-2 rounded-full hover:bg-gray-100 ">
+              View all Products
             </button>
           </Link>
         </div>
       </div>
 
       {/* Brand Features */}
-      <div className="bg-gray-100 py-16">
+      <div className="bg-gray-100 py-16 mb-36">
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-2xl text-center mb-12">What makes our brand different</h2>
           <div className="grid md:grid-cols-4 sm:grid-cols-2 gap-8">
             {[{ title: "Next day as standard", description: "Order before 3pm and get your order the next day as standard" },
               { title: "Made by true artisans", description: "Handmade crafted goods made with real passion and craftsmanship" },
               { title: "Unbeatable prices", description: "For our materials and quality you won't find better prices anywhere" },
-              { title: "Recycled packaging", description: "We use 100% recycled packaging to ensure our footprint is manageable" }]
-              .map((feature, index) => (
+              { title: "Recycled packaging", description: "We use 100% recycled packaging to ensure our footprint is manageable" }].map((feature, index) => (
                 <div key={index} className="text-center">
                   <h3 className="font-medium mb-2">{feature.title}</h3>
                   <p className="text-gray-600">{feature.description}</p>
@@ -183,64 +245,8 @@ export default async function ProductPage({ params }: { params: { slug: string }
         </div>
       </div>
 
-      {/* Newsletter */}
-      <div className="py-16 text-center">
-        <div className="max-w-xl mx-auto px-6">
-          <h2 className="text-2xl mb-4">Join the club and get the benefits</h2>
-          <p className="text-gray-600 mb-6">
-            Sign up for our newsletter and receive exclusive offers on new ranges, sales, pop-up stores, and more
-          </p>
-          <div className="flex gap-4 justify-center">
-            <input type="email" placeholder="your@email.com" className="border rounded px-4 py-2 w-64" />
-            <button className="bg-[#2A254B] text-white px-6 py-2 rounded-full">Sign up</button>
-          </div>
-        </div>
-      </div>
-
       {/* Footer */}
-      <footer className="bg-[#2A254B] text-white py-12">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-4 sm:grid-cols-2 gap-8">
-            <div>
-              <h3 className="text-lg font-medium mb-4">Avion</h3>
-              <p className="text-sm text-gray-300">21 New York Street<br />New York City<br />United States of America<br />432 34</p>
-            </div>
-            <div>
-              <h3 className="text-lg font-medium mb-4">Menu</h3>
-              <ul className="space-y-2 text-gray-300">
-                <li>New arrivals</li>
-                <li>Best sellers</li>
-                <li>Recently viewed</li>
-                <li>Popular this week</li>
-                <li>All products</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-medium mb-4">Categories</h3>
-              <ul className="space-y-2 text-gray-300">
-                <li>Crockery</li>
-                <li>Furniture</li>
-                <li>Homeware</li>
-                <li>Plant pots</li>
-                <li>Chairs</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-medium mb-4">Our company</h3>
-              <ul className="space-y-2 text-gray-300">
-                <li>About us</li>
-                <li>Vacancies</li>
-                <li>Contact us</li>
-                <li>Privacy</li>
-                <li>Returns policy</li>
-              </ul>
-            </div>
-          </div>
-          <div className="mt-12 pt-8 border-t border-gray-700">
-            <p className="text-sm text-gray-300">Copyright 2022 Avion LTD</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
-  )
+  );
 }

@@ -1,5 +1,7 @@
+// src/app/layout.tsx
 import type { Metadata } from "next";
 import "./globals.css";
+import ClientLayout from "./ClientLayout"; // Import ClientLayout
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        {children}
+        <ClientLayout>{children}</ClientLayout> {/* Wrap children with ClientLayout */}
       </body>
     </html>
   );

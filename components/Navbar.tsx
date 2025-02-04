@@ -22,8 +22,8 @@ export default function Navbar() {
 
 
             <ul className="flex gap-x-11 text-[#726E8D] justify-center pt-5 max-sm:hidden">
-                <Link href="/products"> <li>Plant pots</li></Link>
-                <Link href="/products"></Link> <li>Ceramics</li>
+                <Link href="/products"> <li>All Products</li></Link>
+                <Link href="/products"><li>Ceramics</li></Link> 
                 <Link href="/products">  <li>Tables</li></Link>
                 <Link href="/products"> <li>Chairs</li></Link>
                 <Link href="/products"> <li>Crockery</li></Link>
