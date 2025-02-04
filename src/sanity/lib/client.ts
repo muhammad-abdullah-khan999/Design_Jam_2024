@@ -1,11 +1,9 @@
-import { createClient } from 'next-sanity'
-
-import { apiVersion, dataset, projectId } from '../env'
+import { createClient } from "next-sanity";
 
 export const client = createClient({
-  projectId : "nv6ah801",
-  dataset : "production",
-  apiVersion : '2023-01-01',
-  token : "skz70RHhEOwmFcKDiZmanBZrrPXQsY5tqFVChyvmwtmlXNjrqfCvMqj6UfZG8bYjcduasHBySPs9zt9k3V3zocDdLzjzdQnXNLIdaPfidjiT8azWlQZGWiKVJ36HGIicNduF440F6IPapX9oBHIMgiYBrHzIyCB3UQd607q7pB2LDgUKxrND" ,
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
+  apiVersion: '2023-01-01',
+  token: process.env.SANITY_API_TOKEN!,
   useCdn: true, // Set to false if statically generating pages, using ISR or tag-based revalidation
-})
+});
