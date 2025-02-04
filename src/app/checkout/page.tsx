@@ -7,6 +7,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Footer from "../../../components/Footer";
 import Navbar from "../../../components/Navbar";
+import Link from "next/link";
+import CartPage from './../cart/page';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
@@ -61,6 +63,8 @@ const CheckoutPage = () => {
               £{cartItems.reduce((total: number, item: any) => total + item.price * item.quantity, 0).toFixed(2)}
               </span>
             </div>
+            <Link href="../cart"><button  className="mt-4 w-full bg-white text-[#2A254B] py-3 px-8 rounded-lg shadow-md hover:bg-opacity-90 disabled:opacity-50">Go to Cart</button>
+            </Link>
             <button
               onClick={handleCheckout}
               disabled={loading}
@@ -68,6 +72,7 @@ const CheckoutPage = () => {
             >
               {loading ? "Processing..." : "Proceed to Payment"}
             </button>
+            
           </div>
         ) : (
           <p className="text-center text-gray-500">Your cart is empty.</p>
