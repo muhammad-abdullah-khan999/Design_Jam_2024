@@ -64,8 +64,8 @@ export default function Footer() {
       </section>
 
       {/* Footer Bottom Section */}
-      <section className="pt-6 flex sm:justify-between items-center justify-center">
-        <p className="body-sm text-center sm:text-left">Copyright 2022 Avion LTD</p>
+      <section className="pt-6 flex sm:justify-between items-center justify-between">
+        <div><p className="body-sm text-center sm:text-left">Copyright Muhammad Abdullah Khan 2024        .</p></div>
 
         <div className="flex gap-x-6 justify-center sm:justify-start">
           <Image

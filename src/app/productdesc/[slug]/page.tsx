@@ -66,7 +66,7 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
   }, [params]); // Dependency array includes params (which is a promise)
 
   if (!productData) {
-    return <div className="text-center py-10">Product not found</div>;
+    return <div className="text-center py-10">Loading....</div>;
   }
 
   const handleAddToCart = () => {
@@ -192,10 +192,11 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
             <button onClick={handleAddToCart} className="bg-[#2A254B] hover:bg-[#544997] text-white px-6 py-2 rounded-full">
               Add to Cart
             </button>
-           <Link href={"../../cart"}><button className="bg-white hover:bg-gray-100 text-[#2A254B] border border-[#2A254B] px-6 py-2 rounded-full">
-              Go to Cart
-            </button>
-            </Link>
+            <Link href="../../cart">
+  <button className="bg-white hover:bg-gray-100 text-[#2A254B] border border-[#2A254B] px-6 py-2 rounded-full transition-all duration-300">
+    Go to Cart
+  </button>
+</Link>
           </div>
         </div>
       </div>
