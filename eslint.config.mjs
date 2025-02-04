@@ -15,9 +15,10 @@ const eslintConfig = [
   {
     rules: {
       // Disable specific ESLint rules here
-      "@typescript-eslint/no-unused-vars": "off", // Disable the no-unused-vars rule
-      "no-console": "off", // Disable the no-console rule
-      "@typescript-eslint/no-explicit-any": "off", // Disable the no-explicit-any rule
+      "@typescript-eslint/no-unused-vars": "off", // Disable unused variable warnings
+      "no-console": "off", // Allow console.log usage
+      "@typescript-eslint/no-explicit-any": "off", // Allow 'any' type
+      "@next/next/no-img-element": "off", // Allow using <img> instead of <Image />
     },
   },
 ];

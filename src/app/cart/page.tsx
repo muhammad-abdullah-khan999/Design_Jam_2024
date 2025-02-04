@@ -8,6 +8,7 @@ import Footer from "../../../components/Footer";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { TrashIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 
 const CartPage = () => {
@@ -56,13 +57,16 @@ const CartPage = () => {
                 {cartItems.map((item: any) => (
                   <tr key={item.id} className="border-b py-4">
                     <td className="py-4 flex flex-col sm:flex-row items-center gap-4">
-                      <img
-                        src={item.image || "/placeholder.svg"}
-                        alt={item.name}
-                        width={80}
-                        height={80}
-                        className="rounded-lg"
-                      />
+                    <Image
+                      src={item.image || "/placeholder.svg"}
+                      alt={item.name}
+                      width={80}
+                      height={80}
+                      className="rounded-lg"
+                      priority // Ensures faster loading for important images
+                      unoptimized={item.image?.startsWith("http") ? true : false} // If external, skip Next.js optimization
+                    />
+
                       <div>
                         <h4 className="font-medium text-lg text-[#2A254B]">{item.name}</h4>
                         <p className="text-gray-500 text-sm">{item.description}</p>

@@ -64,7 +64,7 @@ export default function Home() {
             <div className='flex flex-col gap-3'>
               <Image src="/different-3.svg" alt='Purchase' width={24} height={24} />
               <h4 className='text-[20px] text-[#2A254B] leading-7 font-semibold'>Unbeatable prices</h4>
-              <p className='text-[16px] text-[#2A254B] leading-6 font-normal'>For our materials and quality you won't find better prices anywhere</p>
+              <p className='text-[16px] text-[#2A254B] leading-6 font-normal'>For our materials and quality you wont find better prices anywhere</p>
             </div>
           </div>
 
