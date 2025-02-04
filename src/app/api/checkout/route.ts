@@ -12,7 +12,7 @@ export async function POST(req: Request) {
     // Format line items
     const line_items = cartItems.map((item: any) => ({
       price_data: {
-        currency: "usd",
+        currency: "gbp",
         product_data: {
           name: item.name,
           images: [item.image],

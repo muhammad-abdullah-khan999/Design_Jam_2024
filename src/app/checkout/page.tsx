@@ -5,6 +5,8 @@ import { loadStripe } from "@stripe/stripe-js";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Footer from "../../../components/Footer";
+import Navbar from "../../../components/Navbar";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
@@ -35,6 +37,9 @@ const CheckoutPage = () => {
   };
 
   return (
+    <>
+
+    <Navbar />
     <main className="min-h-screen p-8 bg-gray-50">
       <ToastContainer />
       <h1 className="text-3xl font-semibold text-[#2A254B] text-center">Checkout</h1>
@@ -46,14 +51,14 @@ const CheckoutPage = () => {
               {cartItems.map((item: any) => (
                 <li key={item.id} className="flex justify-between py-2 border-b">
                   <span>{item.name} (x{item.quantity})</span>
-                  <span>${(item.price * item.quantity).toFixed(2)}</span>
+                  <span>£{(item.price * item.quantity).toFixed(2)}</span>
                 </li>
               ))}
             </ul>
             <div className="mt-6 flex justify-between font-semibold">
               <span>Total:</span>
               <span>
-                ${cartItems.reduce((total: number, item: any) => total + item.price * item.quantity, 0).toFixed(2)}
+              £{cartItems.reduce((total: number, item: any) => total + item.price * item.quantity, 0).toFixed(2)}
               </span>
             </div>
             <button
@@ -74,6 +79,8 @@ const CheckoutPage = () => {
       </div>
       
     </main>
+        <Footer />
+    </>
   );
 };
 
