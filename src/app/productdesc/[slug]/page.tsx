@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import Footer from "../../../../components/Footer";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Navbar from "../../../../components/Navbar";
 
 // Fetch data function
 async function getData(slug: string) {
@@ -100,50 +101,13 @@ export default function ProductPage({ params }: { params: Promise<{ slug: string
 
 
       {/* Announcement Bar */}
-      <div className="bg-[#2A254B] text-white text-center py-3 px-4 text-sm relative">
-        <p>Free delivery on all orders over £50 with code easter checkout</p>
-        <button className="absolute right-4 top-3 text-white">&times;</button>
+      <div className="bg-[#2A254B] text-white text-center py-3 text-sm relative max-sm:flex max-sm:justify-between">
+        <p className="max-sm:w-[90vw]">Free delivery on all orders over £50 with code easter checkout</p>
+        <button className="absolute right-4 top-3 text-white ">&times;</button>
       </div>
 
       {/* Navigation */}
-      <nav className="border-b py-4 px-6">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <Link href="/" className="text-xl font-semibold">
-            Avion
-          </Link>
-          <div className="flex space-x-6">
-            <Link href="/plant-pots" className="text-gray-600">Plant pots</Link>
-            <Link href="/ceramics" className="text-gray-600">Ceramics</Link>
-            <Link href="/tables" className="text-gray-600">Tables</Link>
-            <Link href="/chairs" className="text-gray-600">Chairs</Link>
-            <Link href="/crockery" className="text-gray-600">Crockery</Link>
-            <Link href="/tableware" className="text-gray-600">Tableware</Link>
-            <Link href="/cutlery" className="text-gray-600">Cutlery</Link>
-          </div>
-          <div className="flex items-center space-x-4">
-            <button className="text-gray-600">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-            </button>
-           <Link href={"../../cart"}> <button className="text-gray-600">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                />
-              </svg>
-            </button></Link>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Product Section */}
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 py-12 px-6">

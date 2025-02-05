@@ -56,9 +56,9 @@ export default function Footer() {
             <input
               type="email"
               placeholder="your@email.com"
-              className="py-4 px-6 sm:px-8 bg-[#ffffff26] text-white grow rounded-md focus:outline-none"
+              className="py-4 px-6 sm:px-8 bg-[#ffffff26] text-black grow rounded-md focus:outline-none"
             />
-            <button type="submit" className="btn btn-primary">Sign up</button>
+            <button type="submit" className="btn btn-primary hover:bg-[#2A254B] hover:text-white">Sign up</button>
           </form>
         </div>
       </section>
@@ -73,42 +73,42 @@ export default function Footer() {
             alt="facebook"
             width={24}
             height={24}
-            className="hover:scale-110 transition-transform"
+            className="max-sm:hidden hover:scale-110 transition-transform"
           />
           <Image
             src="/instagram.svg"
             alt="instagram"
             width={24}
             height={24}
-            className="hover:scale-110 transition-transform"
+            className=" max-sm:hidden hover:scale-110 transition-transform"
           />
           <Image
             src="/linkedin.svg"
             alt="linkedin"
             width={24}
             height={24}
-            className="hover:scale-110 transition-transform"
+            className="max-sm:hidden hover:scale-110 transition-transform"
           />
           <Image
             src="/pinterest.svg"
             alt="pinterest"
             width={24}
             height={24}
-            className="hover:scale-110 transition-transform"
+            className="max-sm:hidden hover:scale-110 transition-transform"
           />
           <Image
             src="/skype.svg"
             alt="skype"
             width={24}
             height={24}
-            className="hover:scale-110 transition-transform"
+            className="max-sm:hidden hover:scale-110 transition-transform"
           />
           <Image
             src="/twitter.svg"
             alt="twitter"
             width={24}
             height={24}
-            className="hover:scale-110 transition-transform"
+            className="max-sm:hidden hover:scale-110 transition-transform"
           />
         </div>
       </section>

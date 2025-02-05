@@ -13,10 +13,13 @@ interface ProductCard {
   price: number;
   image: string;
   slug: string;
+  category: string;
 }
 
 export default function Home() {
   const [products, setProducts] = useState<ProductCard[]>([]);
+  const [categories, setCategories] = useState<{ name: string; slug: string }[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
@@ -24,30 +27,39 @@ export default function Home() {
   const productsPerPage = 12;
 
   useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const categoryQuery = `*[_type == "category"] { name, slug { current } }`;
+        const categoryData = await client.fetch(categoryQuery);
+        setCategories(categoryData.map((cat: any) => ({ name: cat.name, slug: cat.slug.current })));
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+    fetchCategories();
+  }, []);
+
+  useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const query = `*[_type == "product"] | order(_createdAt desc) {
+        const categoryFilter = selectedCategory ? `&& category->slug.current == "${selectedCategory}"` : "";
+        const query = `*[_type == "product" ${categoryFilter}] | order(_createdAt desc) {
           name,
           price,
-          image {
-            asset -> {
-              _id,
-              url
-            }
-          },
-          slug {
-            current
-          }
+          image { asset -> { _id, url } },
+          slug { current },
+          category-> { slug }
         }`;
-
+        
         const data = await client.fetch(query);
         const formattedProducts = data.map((item: any) => ({
           name: item.name,
           price: item.price,
           image: item.image.asset.url,
           slug: item.slug.current,
+          category: item.category?.slug.current || "",
         }));
-
+        
         setProducts(formattedProducts);
         setTotalPages(Math.ceil(formattedProducts.length / productsPerPage));
         setLoading(false);
@@ -58,20 +70,17 @@ export default function Home() {
     };
 
     fetchProducts();
-  }, []);
+  }, [selectedCategory]);
 
-  // Handle search input change
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value.toLowerCase());
-    setCurrentPage(1); // Reset to first page whenever a new search is entered
+    setCurrentPage(1);
   };
 
-  // Filter products based on search query
   const filteredProducts = products.filter((product) =>
     product.name.toLowerCase().includes(searchQuery)
   );
 
-  // Pagination logic for filtered products
   const paginateProducts = () => {
     const startIndex = (currentPage - 1) * productsPerPage;
     return filteredProducts.slice(startIndex, startIndex + productsPerPage);
@@ -80,6 +89,25 @@ export default function Home() {
   return (
     <>
       <Navbar />
+      
+      {/* Category Filter */}
+      <ul className="flex gap-x-11 sm:justify-center text-[#726E8D] max-sm:px-6 py-4 sm:py-5 bg-[--light-gray] *:w-max *:shrink-0 max-sm:overflow-x-auto">
+        <li
+          className={`cursor-pointer ${!selectedCategory ? "font-bold text-black" : ""}`}
+          onClick={() => setSelectedCategory(null)}
+        >
+          All Products
+        </li>
+        {categories.map((category) => (
+          <li
+            key={category.slug}
+            className={`cursor-pointer ${selectedCategory === category.slug ? "font-bold text-black" : ""}`}
+            onClick={() => setSelectedCategory(category.slug)}
+          >
+            {category.name}
+          </li>
+        ))}
+      </ul>
 
       <main>
         {/* Hero Section */}
@@ -89,9 +117,6 @@ export default function Home() {
         >
           <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-50"></div>
           <h1 className="z-10 text-3xl sm:text-4xl font-semibold">All Products</h1>
-          <button className="z-10 absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 bg-[#2A254B] text-white py-2 px-6 rounded-full text-sm">
-            Shop Now
-          </button>
         </section>
 
         {/* Search Bar */}
@@ -138,31 +163,10 @@ export default function Home() {
               No products found.
             </div>
           )}
-
-          {/* Pagination Controls */}
-          <div className="flex justify-center items-center mt-8 space-x-4">
-            <button
-              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-              disabled={currentPage === 1}
-              className="px-4 py-2 bg-[#2A254B] text-white rounded-sm disabled:bg-gray-400"
-            >
-              Previous
-            </button>
-            <span className="body-lg">{`Page ${currentPage} of ${Math.ceil(filteredProducts.length / productsPerPage)}`}</span>
-            <button
-              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, Math.ceil(filteredProducts.length / productsPerPage)))}
-              disabled={currentPage === Math.ceil(filteredProducts.length / productsPerPage)}
-              className="px-4 py-2 bg-[#2A254B] text-white rounded-sm disabled:bg-gray-400"
-            >
-              Next
-            </button>
-          </div>
         </section>
       </main>
 
-      {/* Footer */}
       <Footer />
-     
     </>
   );
 }

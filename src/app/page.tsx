@@ -25,8 +25,8 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        <div className='lg:hidden w-[390px] '>
-          <div className='w-[341px] mx-[23px] mt-[47px] mb-8 flex flex-col gap-8'>
+        <div className='lg:hidden w-screen '>
+          <div className='w-screen mx-[23px] pr-[46px]  mt-[47px] mb-8 flex flex-col gap-8'>
             <h2 className='font-normal text-[24px] leading-[29.52px] text-[#22202E] '>Luxury homeware for people who love timeless design quality</h2>
             <p className='font-normal text-[16px] leading-[21.6px] text-[#5B5676]'>With our new collection, view over 400 bespoke pieces from homeware through to furniture today</p>
              <Link href="./products"><button className='w-full h-[56px] flex items-center justify-center gap-5  bg-[#2A254B] text-white hover:bg-white hover:text-[#2A254B] rounded-xl border border-[#2A254B]'>
@@ -34,7 +34,7 @@ export default function Home() {
             </button>
             </Link>
           </div>
-          <Image src="/bg-hero.png" alt="Hero Image" width={390} height={304}></Image>
+          <Image src="/hero2.png" alt="Hero Image" width={390} height={304} className='w-screen'></Image>
         </div>
       </div>
 
@@ -84,47 +84,49 @@ export default function Home() {
 
           {/* Dynamically Link Products by Slug */}
           <Link href={`/productdesc/the-lucky-lamp`}><div className=' flex flex-col gap-2 lg:gap-6 text-[#2A254B]'>
-            <Image src="home-product-4.svg" alt='List Card1' width={100} height={100} className='w-[163px] h-[201px] lg:w-[305px] lg:h-[375px]'></Image>
+            <Image src="home-product-4.svg" alt='List Card1' width={163} height={201} className='w-[163px] h-[201px] lg:w-[305px] lg:h-[375px] transition-transform duration-300 hover:scale-105'></Image>
             <h4 className='text-[20px] leading-7 font-normal'>The Lucky Lamp</h4>
             <p className='text-[18px] leading-7 font-normal'>£200</p>
           </div>
           </Link>
 
           <Link href={`/productdesc/rustic-vase-set`}><div className=' flex flex-col gap-2 lg:gap-6 text-[#2A254B]'>
-            <Image src="home-product-2.svg" alt='List Card2' width={163} height={201} className='w-[163px] h-[201px] lg:w-[305px] lg:h-[375px]'></Image>
+            <Image src="home-product-2.svg" alt='List Card2' width={163} height={201} className='w-[163px] h-[201px] lg:w-[305px] lg:h-[375px] transition-transform duration-300 hover:scale-105'></Image>
             <h4 className='text-[20px] leading-7 font-normal'>Rustic Vase Set</h4>
             <p className='text-[18px] leading-7 font-normal'>£150</p>
           </div>
           </Link>
 
           <Link href={`/productdesc/the-dandy-chair`}><div className=' flex flex-col gap-2 lg:gap-6 text-[#2A254B]'>
-            <Image src="home-product-8.svg" alt='List Card3' width={163} height={201} className='w-[163px] h-[201px] lg:w-[305px] lg:h-[375px]'></Image>
+            <Image src="home-product-8.svg" alt='List Card3' width={163} height={201} className='w-[163px] h-[201px] lg:w-[305px] lg:h-[375px] transition-transform duration-300 hover:scale-105'></Image>
             <h4 className='text-[20px] leading-7 font-normal'>The Dandy chair</h4>
             <p className='text-[18px] leading-7 font-normal'>£150</p>
           </div>
           </Link>
 
           <Link href={`/productdesc/timbercraft`}><div className=' flex flex-col gap-2 lg:gap-6 text-[#2A254B]'>
-            <Image src="home-product-9.svg" alt='List Card4' width={163} height={201} className='w-[163px] h-[201px] lg:w-[305px] lg:h-[375px]'></Image>
+            <Image src="home-product-9.svg" alt='List Card4' width={163} height={201} className='w-[163px] h-[201px] lg:w-[305px] lg:h-[375px] transition-transform duration-300 hover:scale-105'></Image>
             <h4 className='text-[20px] leading-7 font-normal'>TimberCraft</h4>
             <p className='text-[18px] leading-7 font-normal'>£320</p>
           </div>
           </Link>
 
         </div>
-        <Link href="/products"> <button className='py-4 px-[100px] mt-10 lg:px-8  mx-auto lg:mt-[48px] lg:mb-3 flex lg:gap-5 gap-[10px] items-center text-[16px] leading-6 font-normal  bg-[#2A254B] text-white hover:bg-white hover:text-[#2A254B] rounded-full border border-[#2A254B] '>
+        <div className=''>
+        <Link href="/products"> <button className='py-4 w-[70vw] md:w-[20vw] mt-10 lg:px-8  mx-auto lg:mt-[48px] lg:mb-3 flex justify-center lg:gap-5 gap-[10px] items-center text-[16px] leading-6 font-normal  bg-[#2A254B] text-white hover:bg-white hover:text-[#2A254B] rounded-full border border-[#2A254B] '>
           View collection
         </button></Link>
+        </div>
       </div>
 
       {/* fourth section */}
       <div className='px-8 py-6 lg:px-[80px] lg:py-[60px] flex flex-col lg:flex-row lg:gap-4 gap-6 justify-center'>
-        <div className='lg:w-[643px] lg:h-[478px]  bg-[#2A254B] lg:pl-[64px] px-[32px] pt-[36px] lg:py-[64px] '>
+        <div className='lg:w-[643px] lg:h-[478px]  bg-[#2A254B] lg:pl-[64px] px-[22px] pt-[36px] lg:py-[64px] '>
           <div className='mb-[56px] lg:mb-[205px]'>
             <h4 className='font-normal lg:text-[32px] text-[20px] leading-7 lg:leading-[39.63px] text-white mb-5'>It started with a small idea</h4>
             <p className='font-normal lg:text-[18px] tex-[14px] leading-[21px] lg:leading-[24.3px] text-[white]'>A global brand with local beginnings, our story began in a small studio in South London in early 2014</p>
           </div>
-          <Link href="/products"> <button className='py-4 px-[66px] mb-[30px]  lg:px-8 lg:mt-[48px] lg:mb-3 flex lg:gap-5 gap-[10px]  text-[16px] leading-6 font-normal  bg-[#F9F9F926] text-white'>
+          <Link href="/products"> <button className='py-4 px-[16px] mb-[30px]  lg:px-8 lg:mt-[48px] lg:mb-3 flex lg:gap-5 gap-[10px]  text-[16px] leading-6 font-normal  bg-[#F9F9F926] text-white'>
             View collection
           </button></Link>
         </div>
@@ -137,7 +139,7 @@ export default function Home() {
         <div className='w-[329px] lg:w-full ml-[24px] flex flex-col gap-5 lg:gap-[30px]  justify-center'>
           <h2 className='w-full lg:text-[32px] text-[24px] leading-[33.6px] lg:leading-[44.8px] lg:text-center font-normal text-white'>
             Join the club and get the benefits</h2>
-          <p className='lg:text-[18px] text-[14px] leading-[21px] lg:leading-[27px] lg:text-center font-normal text-white'>Sign up for our newsletter and receive exclusive offers on new ranges, sales, pop up stores and more</p>
+          <p className='lg:text-[18px] text-[14px] leading-[21px] lg:leading-[27px] lg:text-center font-normal text-white pr-[48]'>Sign up for our newsletter and receive exclusive offers on new ranges, sales, pop up stores and more</p>
           <div className='flex flex-col lg:flex-row lg:gap-[36px] text-white justify-center'>
             <div className='flex lg:gap-1 gap-2'>
               <IoCheckmarkCircle className='text-white flex  items-center mt-1' size={16} />
@@ -157,9 +159,9 @@ export default function Home() {
 
         <div className='flex lg:w-full justify-center mx-[24px] mt-[28px] lg:mt-10'>
           <div className='lg:w-[354px] h-[56px] w-[224px] bg-[#F9F9F9] '>
-            <input type="text" placeholder='your@email.com' className='bg-transparent h-full w-full pl-[32px] text-black border-none' />
+            <input type="text" placeholder='your@email.com' className='bg-transparent h-full w-full pl-[32px] text-black border-none ' />
           </div>
-          <button type='submit' className='font-normal h-[56px] text-[16px] leading-6 py-4 lg:px-8 px-5 flex gap-[10px] bg-[#2A254B] text-white'>Sign up</button>
+          <button type='submit' className='font-normal h-[56px] text-[16px] leading-6 py-4 lg:px-8 px-5 gap-[10px] bg-[#2A254B] text-white flex items-center justify-center'>Sign up</button>
         </div>
       </div>
 
