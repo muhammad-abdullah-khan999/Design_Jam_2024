@@ -86,6 +86,10 @@ export default function Home() {
     return filteredProducts.slice(startIndex, startIndex + productsPerPage);
   };
 
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
   return (
     <>
       <Navbar />
@@ -163,6 +167,35 @@ export default function Home() {
               No products found.
             </div>
           )}
+
+          {/* Pagination Controls */}
+          <div className="flex justify-center gap-4 mt-6">
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="bg-[#2A254B] text-white px-4 py-2 rounded-full disabled:bg-gray-400"
+            >
+              Previous
+            </button>
+
+            {[...Array(totalPages)].map((_, index) => (
+              <button
+                key={index}
+                onClick={() => handlePageChange(index + 1)}
+                className={`px-4 py-2 rounded-full ${currentPage === index + 1 ? 'bg-[#2A254B] text-white' : 'text-[#2A254B] border border-[#2A254B]'} hover:bg-[#3d2a6e]`}
+              >
+                {index + 1}
+              </button>
+            ))}
+
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="bg-[#2A254B] text-white px-4 py-2 rounded-full disabled:bg-gray-400"
+            >
+              Next
+            </button>
+          </div>
         </section>
       </main>
 
