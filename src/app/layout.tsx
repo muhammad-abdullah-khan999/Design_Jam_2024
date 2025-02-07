@@ -2,6 +2,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ClientLayout from "./ClientLayout"; // Import ClientLayout
+import { ClerkProvider } from '@clerk/nextjs';
+import { dark, neobrutalism, shadesOfPurple } from '@clerk/themes'
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,10 +16,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ClerkProvider appearance={{
+      baseTheme: [shadesOfPurple],
+        variables: { colorPrimary: 'white' },
+      signIn: {
+        baseTheme: [shadesOfPurple],
+        variables: { colorPrimary: 'white' },
+      },
+    }}>
     <html lang="en" suppressHydrationWarning>
       <body>
+        
         <ClientLayout>{children}</ClientLayout> {/* Wrap children with ClientLayout */}
       </body>
     </html>
+    </ClerkProvider>
   );
 }
