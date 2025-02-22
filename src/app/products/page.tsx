@@ -92,7 +92,7 @@ export default function Home() {
 
   return (
     <>
-      <Navbar />
+     <div className="z-50"> <Navbar /> </div>
       
       {/* Category Filter */}
       <ul className="flex gap-x-11 sm:justify-center text-[#726E8D] max-sm:px-6 py-4 sm:py-5 bg-[--light-gray] *:w-max *:shrink-0 max-sm:overflow-x-auto">
@@ -114,9 +114,11 @@ export default function Home() {
       </ul>
 
       <main>
+
+        
         {/* Hero Section */}
         <section
-          className="h-[146px] sm:h-[209px] bg-cover bg-center sm:pl-20 pb-8 sm:pb-9 content-end text-white max-sm:text-center relative"
+          className="h-[146px] sm:h-[209px] bg-cover bg-center sm:pl-20 pb-8 sm:pb-9 content-end text-white max-sm:text-center relative z-30"
           style={{ backgroundImage: "url(/product-hero-bg.jpeg)" }}
         >
           <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-50"></div>

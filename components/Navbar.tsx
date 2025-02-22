@@ -54,7 +54,7 @@ export default function Navbar() {
             <SignInButton mode="modal" />
           </SignedOut>
           <SignedIn>
-            <UserButton  />
+            <UserButton />
             <SignedOut />
           </SignedIn>
 
@@ -142,10 +142,19 @@ export default function Navbar() {
               <button aria-label="Search" className="hover:bg-gray-100 p-2 rounded-full transition">
                 <Image src="/nav-search.svg" alt="Search" width={20} height={20} />
               </button>
-
               <button aria-label="User Profile" className="hover:bg-gray-100 p-2 rounded-full transition">
                 <Image src="/nav-user.svg" alt="User Profile" width={20} height={20} />
               </button>
+              <button>
+              <SignedOut>
+            <SignInButton mode="modal" />
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+            <SignedOut />
+          </SignedIn>
+              </button>
+              
             </div>
           </motion.div>
         )}

@@ -14,9 +14,9 @@ export default function Home() {
       <Navbar />
       {/* Hero Section */}
       <div>
-        <div className='hidden lg:block lg:bg-[url(/heroImage.png)] bg-cover bg-center lg:h-[704px] lg:w-full lg:py-[130px] lg:pl-[730px] lg:pr-[80px] relative'>
-          <div className='absolute inset-0 bg-gradient-to-r from-black via-transparent to-black opacity-40'></div>
-          <div className='relative z-10 bg-white pl-[53px] py-[47px] ml-40 w-[830px] rounded-lg shadow-lg'>
+        <div className='hidden lg:block lg:bg-[url(/heroImage.png)] bg-cover bg-center lg:h-[704px] lg:w-[100vw] lg:py-[130px] lg:pl-[44vw] lg:pr-[180px] relative'>
+          <div className='absolute  inset-0 bg-gradient-to-r from-black via-transparent to-black opacity-40 '></div>
+          <div className='relative z-10 bg-white pl-[53px] py-[47px] w-[830px] rounded-lg shadow-lg'>
             <h2 className='font-bold text-[34px] leading-[48px] text-[#22202E] mb-5 '>Luxury homeware for people who love timeless design quality</h2>
             <p className='font-medium text-[18px] leading-[27px] text-[#5B5676] mb-6'>Shop the new Spring 2022 collection today</p>
             <Link href="./products"><button className='py-4 px-8 flex gap-5 bg-[#2A254B] text-white hover:bg-white hover:text-[#2A254B] rounded-xl border border-[#2A254B] shadow-lg transition-all'>
